@@ -1,0 +1,13 @@
+
+<p>
+	<h2>Les <%= @nb_types %> types de Pokémons :</h2>
+</p>
+
+<% @poketypes.each do |t| %>
+<table class="table table-bordered">
+	<tr data-toggle="tooltip" data-placement="top" title="<%= t['name']%>" >
+		<td> <%= link_to t['name'], poke_type_path(t['id']), method: :get %> 
+		</td>
+	</tr>
+</table>
+<% end %>
