@@ -7,6 +7,16 @@ gem 'rails', '4.0.1'
 gem 'sqlite3'
 gem 'httparty'
 
+group :development do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+gem 'will_paginate-bootstrap'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -15,6 +25,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+gem 'ruby-progressbar'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -33,7 +44,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'pry'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -1,15 +1,18 @@
 class PokemonsController < ApplicationController
   def index
-  	@pokemons = HTTParty.get("http://pokeapi.co/api/v1/pokemon?limit=12&offset=0")['objects']
+  	@pokemons = Pokemon.all.paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
-  	id = params[:pkdx_id]
-  	@pokemon = HTTParty.get("http://pokeapi.co/api/v1/pokemon/#{id}")	
+  	@pokemon = Pokemon.find(params[:id])
   end
 
   def random
-  	random_id = Time.now.to_i % 778 #@pokemons.count
-  	@pokemon = HTTParty.get("http://pokeapi.co/api/v1/pokemon/#{random_id}")
+  	@pokemon = Pokemon.all.sample
   end
 end

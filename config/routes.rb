@@ -1,12 +1,14 @@
 Pokedex::Application.routes.draw do
 
-  get "poke_types/index"
-  get "poke_types/show"
-  resources :pokemons
+  resources :poke_types, only: [:index, :show]
+  resources :pokemons do
+    collection do
+      get :random
+    end
+  end
   resources :poke_types
 
   root "pokemons#index"
-  match 'random', to: 'pokemons#random', via: 'get'
 
   # match "pokemons/random", to: "pokemons#random", via: :get
   # The priority is based upon order of creation: first created -> highest priority.

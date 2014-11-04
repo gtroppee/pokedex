@@ -1,0 +1,9 @@
+<% @pokemons.each do |pokemon| %>
+  $('.pokemon-list').append('<%= j render pokemon %>');
+<% end %>
+
+<% if @pokemons.try(:next_page) %>
+  $('.pagination').replaceWith('<%= j will_paginate(@pokemons) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

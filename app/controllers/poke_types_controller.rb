@@ -5,8 +5,8 @@ class PokeTypesController < ApplicationController
   end
 
   def show
-	id = params[:id]
-	@name = params[:name]
-	@poketype = HTTParty.get("http://pokeapi.co/api/v1/type/#{id}")
+  	id = params[:id]
+  	@name = params[:name]
+  	@poketype = HTTParty.get("http://pokeapi.co/api/v1/type/#{id}")
   end
 end

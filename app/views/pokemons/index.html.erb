@@ -1,17 +1,23 @@
 <div class="row">
-<ul>
-	<%	@pokemons.each do |p| %>
-  	<div class="col-xs-6 col-md-3">
-  		<p><%= link_to p['name'], pokemon_path(p["pkdx_id"]) %> </p>
-   			<% sprite = p['sprites'][0]['resource_uri'] %>
-			<% image = HTTParty.get("http://pokeapi.co#{sprite}")['image'] %>
-			<%= image_tag("http://pokeapi.co#{image}", :class => "thumbnail") %>
-
-    <p>
-    	<a href="#" class="btn btn-primary" role="button">Acheter</a> 
-    	<a href="#" class="btn btn-default" role="button">Vendre</a>
-    </p>
-  </div>
-  <% end %>
-</ul>
+  <ul class="pokemon-list">
+    <%= render @pokemons %>
+  </ul>
+  <%= will_paginate @pokemons %>
 </div>
+
+<script type="text/javascript">
+  function setUpEndlessScrolling(){
+    if ($('.pagination').length > 0){
+      $(window).scroll(function(){
+        var url = $('.pagination a.next_page').attr('href');
+        if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
+          $('.pagination').text("Chargement en cours...");
+          $.getScript(url);
+        }
+      });
+      $(window).scroll();
+    }
+  }
+
+  setUpEndlessScrolling();
+</script>
