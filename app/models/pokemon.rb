@@ -1,11 +1,9 @@
 class Pokemon < ActiveRecord::Base
   serialize :data, Hash
+  attr_accessor :pkdx_id
 
   self.per_page = 20
 
-  def avatar
-    sprites[0]['resource_uri']
-  end
 
   def method_missing(method_name)
     super unless data.has_key?("#{method_name}")

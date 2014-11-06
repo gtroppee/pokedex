@@ -10,12 +10,12 @@ li {
 	 padding: 10px;
 }
 */
-/*
-body div .random_style  {
-	background-color: rgba(0, 0, 255, 0.5);
-	c
-}
 
+div .random_style  {
+	background-color: rgba(0, 0, 255, 0.5);
+	border-radius: 0.5 0.5;
+}
+/*
 	normal = (134,190,203, 0.5)
 	Fighting = (254,129,129, 0.5)
 	flying  (99,172,229)

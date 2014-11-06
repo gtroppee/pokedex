@@ -1,91 +1,27 @@
 
 
+<% type = ["ineffective", "no_effect", "resistance", "super_effective", "weakness"] %>
 <table class="table table-striped">
-  <tr id="tab_name">
-  	<td><h1><%= @poketype['name'] %> </h1> </td>
-  </tr>
   <tr>
-  	<td>
-  		<h3> Ineffective 
-  			<span class="badge">
-  				<%= @poketype['ineffective'].count %>
-  			 </span>
-		</h3>
-	</td>
-  	<td>
-  		<h3> No Effect 
-  			<span class="badge">
-  				<%= @poketype['no_effect'].count %>
-  			 </span>
-  		</h3>
-    </td>
-  	<td>
-  		<h3> Resistance 
-  			<span class="badge">
-  				<%= @poketype['resistance'].count %>
-  			 </span>
-  		</h3>
-  	</td>
-  	<td>
-  		<h3> Super Effective
-  			<span class="badge">
-  				<%= @poketype['super_effective'].count %>
-  			 </span>
-  		</h3></td>
-  	<td>
-  		<h3> Weakness 
-  			<span class="badge">
-  				<%= @poketype['weakness'].count %>
-  			 </span>
-  		</h3>
-  	</td>
+    <% type.each do |t| %>
+        <td> <h3> <%= t.humanize %> </h3>
+          <span class="badge"> <%= @poketype[t].count %> </span>
+        </td>
+    <% end %>
   </tr>
-  <tr>
-  	<td>
-  		<h4>
-			<ul>
-			<% @poketype['ineffective'].each do |t| %>
-				<li><%= t['name'] %> </li>
-			<% end %>
-			</ul>	  			
-  		</h4>
-  	</td>
-  	<td>
-  		<h4>
-			<ul>
-			<% @poketype['no_effect'].each do |t| %>
-				<li><%= t['name'] %> </li>
-			<% end %>
-			</ul>	  			
-  		</h4>
-  	</td>
-  	<td>
-  		<h4>
-			<ul>
-			<% @poketype['resistance'].each do |t| %>
-				<li><%= t['name'] %> </li>
-			<% end %>
-			</ul>	  			
-  		</h4>
-  	</td>
-  	<td>
-  		<h4>
-			<ul>
-			<% @poketype['super_effective'].each do |t| %>
-				<li><%= t['name'] %> </li>
-			<% end %>
-			</ul>	  			
-  		</h4>
-  	</td>
-  	<td>
-  		<h4>
-			<ul>
-			<% @poketype['weakness'].each do |t| %>
-				<li><%= t['name'] %> </li>
-			<% end %>
-			</ul>	  			
-  		</h4>
-  	</td>
-  </tr>
-</table>
 
+  <tr>
+    <% type.each do |t| %>
+      <td>
+        <% @poketype[t].each do |tn| %>
+          <ul>
+              <h4>
+                  <li style="list-style: none">  <%= tn['name'] %> </li>
+              </h4>
+          </ul>
+        <% end %>
+      </td>
+    <% end %>
+  </tr>
+
+</table>
