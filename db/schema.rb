@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104162952) do
+
+ActiveRecord::Schema.define(version: 20141104162851) do
+
 
   create_table "pokemons", force: true do |t|
     t.datetime "created_at"

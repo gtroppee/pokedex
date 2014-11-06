@@ -1,7 +1,7 @@
 class PokemonsController < ApplicationController
   def index
   	@pokemons = Pokemon.all.order('pkdx_id ASC').paginate(page: params[:page])
-  # sleep 0.2
+
     respond_to do |format|
       format.html
       format.js
