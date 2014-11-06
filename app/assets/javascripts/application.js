@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function voteForPokemon(url, rating){
+  $.ajax({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader(
+        'X-CSRF-Token', 
+        $('meta[name="csrf-token"]').attr('content'))},
+    url: url + '?rating=' + rating,
+    type: "PUT",
+    contentType: "application/javascript",
+  });
+}

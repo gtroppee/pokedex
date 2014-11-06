@@ -1,9 +1,18 @@
 Pokedex::Application.routes.draw do
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :pokemons, only: [:index, :show]
+    end
+  end
+
   resources :poke_types, only: [:index, :show]
   resources :pokemons do
     collection do
       get :random
+    end
+    member do
+      put :vote
     end
   end
   resources :poke_types

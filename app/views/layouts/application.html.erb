@@ -9,7 +9,7 @@
   <%= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= yield(:pokemon_type) %>">
 	<div class="container">
 		<%=  render 'layouts/header' %>
 		<%= yield %>

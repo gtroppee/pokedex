@@ -18,7 +18,12 @@ namespace :pk do
           else
             avatar = "http://www.google.fr/imgres?imgurl=http%3A%2F%2Fstatic.planetminecraft.com%2Ffiles%2Fresource_media%2Fscreenshot%2F1318%2FQuestion_mark_alternate_5357730.jpg&imgrefurl=http%3A%2F%2Fwww.planetminecraft.com%2Fblog%2Fwant-a-minecraft-server-trailer%2F&h=640&w=494&tbnid=yFKpmq0TBHbJrM%3A&zoom=1&docid=nTQSmeMxkMn9VM&ei=9_ZYVO25I6zdsATXyIHABA&tbm=isch&iact=rc&uact=3&dur=179&page=3&start=74&ndsp=32&ved=0CLYCEK0DMFs"
           end
-          Pokemon.create(data: data, avatar: avatar)
+          Pokemon.create(
+            data: data, 
+            avatar: avatar, 
+            pkdx_id: data['pkdx_id']
+          )
+          
           progress.increment
         end
       end

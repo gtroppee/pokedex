@@ -1,9 +1,24 @@
-
-<div class="col-xs-6 col-md-3" style="height: 300px;">
+<div class="col-xs-6 col-md-3 pokemon-item" style="height: 300px;" data-pokemon-id="<%= pokemon.pkdx_id %>">
   <p><%= link_to pokemon.name, pokemon_path(pokemon) %> </p>
   <%= image_tag pokemon.avatar %>
   <p>
-    <a href="#" class="btn btn-primary" role="button">Acheter</a> 
-    <a href="#" class="btn btn-default" role="button">Vendre</a>
+    <a href="#" class="btn btn-primary" role="button">Like</a> 
+    <a href="#" class="btn btn-danger" role="button">Dislike</a>
   </p>
+  <div class="rating"></div>
+
+  <% pokemon.types.each do |type| %>
+  <span class="badge <%= type %>"><%= type %></span>
+  <% end %>
 </div>
+
+<script type="text/javascript">
+  $('.rating').raty();
+
+  $('.rating img').click(function(){
+    rating      = $(this).attr('alt');
+    pokemon_id  = $(this).parents(".pokemon-item").data('pokemon-id')
+    url = '/pokemons/'+ pokemon_id +'/vote'
+    voteForPokemon(url, rating);
+  });
+</script>

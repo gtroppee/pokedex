@@ -3,6 +3,14 @@ class Pokemon < ActiveRecord::Base
 
   self.per_page = 20
 
+  def type_string
+    types.join(' ')
+  end
+
+  def types
+    data['types'].map{|t| t['name']}
+  end
+
   def method_missing(method_name)
     super unless data.has_key?("#{method_name}")
     data["#{method_name}"]

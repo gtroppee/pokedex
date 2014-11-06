@@ -15,4 +15,11 @@ class PokemonsController < ApplicationController
   def random
   	@pokemon = Pokemon.all.sample # sample prend en compte tous les objets de la classe
   end
+
+  def vote
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 end
