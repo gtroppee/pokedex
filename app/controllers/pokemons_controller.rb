@@ -10,11 +10,6 @@ class PokemonsController < ApplicationController
 
   def show
     @pok = Pokemon.find_by(id: params[:id])
-    # binding.pry
-    @poke_map = Hash["pok", @pok.to_s,
-                    "lat", @pok.latitude.to_f,
-                    "lng", @pok.longitude.to_f]
-    # binding.pry
   end
 
   def random

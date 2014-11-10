@@ -1,11 +1,9 @@
 <h3>Catch <%= @pok.to_s %> here : </h3>
 <div id="map-canvas" style="height: 350px; weigth:350px; margin: 10px;"></div>
-<div id="map_canvas" data-map-canvas="<%= @poke_map.to_json %>"></div>
 
 <script type="text/javascript" >
-  var lat_lng = $("#map_canvas").data('map-canvas');
-  var lati = lat_lng['lat']
-  var longi = lat_lng['lng']
+  var lati = <%= @pok.latitude %>
+  var longi = <%= @pok.longitude %>
 
 	function initialize() {
     var mapOptions = {
@@ -18,7 +16,7 @@
         map: map,
     });
   }
-  
+
   $(document).ready(function() {
     initialize();
   });
