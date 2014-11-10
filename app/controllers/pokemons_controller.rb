@@ -9,18 +9,12 @@ class PokemonsController < ApplicationController
   end
 
   def show
-
-    @poke_map = Pokemon.all.map do |pokemon|
-      {
-        pokemon: pokemon.to_s,
-        latlng: "#{pokemon.latitude},#{pokemon.longitude}"
-      }
-    end
-    respond_to do |format|
-      # format.js
-      format.html
-    end
-
+    @pok = Pokemon.find_by(id: params[:id])
+    # binding.pry
+    @poke_map = Hash["pok", @pok.to_s,
+                    "lat", @pok.latitude.to_f,
+                    "lng", @pok.longitude.to_f]
+    # binding.pry
   end
 
   def random
@@ -50,6 +44,14 @@ class PokemonsController < ApplicationController
         rating: pokemon.rating
       }
     end
+          # binding.pry
+
   end
+
+  # private
+  #   def pkdx_id_param
+  #     params.require(:pokemon).permit(:pkdx_id)
+  #   end
+
 
 end
