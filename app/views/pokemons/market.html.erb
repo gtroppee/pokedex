@@ -19,11 +19,3 @@
 	  labels: ['Rating']
 	});
 </script>
-
-<% if false %>
-<% @top_rate.each do |k, v| %>
-	<% Vote.where('pokemon_id = k').sum('rating') / v %>
-	<%= pokemon_id = k %>
-	<%= nb_vote = v %>
-<% end %>
-<% end %>

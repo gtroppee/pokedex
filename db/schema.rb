@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141110112146) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "vote_count"
     t.string   "latitude"
     t.string   "longitude"
   end

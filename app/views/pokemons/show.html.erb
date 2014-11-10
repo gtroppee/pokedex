@@ -1,9 +1,25 @@
 
- Data poké
+<div id="map-canvas" style="height: 100%; margin: 0; padding: 0;"></div>
 
- <ul>
- 	<%= @pokemon.name %>
- 		<li> <%= @pokemon.exp %> </li>
- 		<li> <%= @pokemon.hp %> </li>
- 		<li> <%= @pokemon.height %> </li>
- </ul>
+
+
+    <script type="text/javascript" >
+    
+      function initialize() {
+      	console.log('start1');
+        var mapOptions = {
+          center: { lat: 0, lng: 0},
+          zoom: 2
+        };
+        console.log('start0');
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+      var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(-34.397,150.644),
+          map: map,
+      });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+

@@ -9,7 +9,18 @@ class PokemonsController < ApplicationController
   end
 
   def show
-  	@pokemon = Pokemon.find(params[:id])
+
+    @poke_map = Pokemon.all.map do |pokemon|
+      {
+        pokemon: pokemon.to_s,
+        latlng: "#{pokemon.latitude},#{pokemon.longitude}"
+      }
+    end
+    respond_to do |format|
+      # format.js
+      format.html
+    end
+
   end
 
   def random
