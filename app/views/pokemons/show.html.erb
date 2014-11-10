@@ -3,24 +3,24 @@
 <div id="map_canvas" data-map-canvas="<%= @poke_map.to_json %>"></div>
 
 <script type="text/javascript" >
-
-    var lat_lng = $("#map_canvas").data('map-canvas');
-    var lati = lat_lng['lat']
-    var longi = lat_lng['lng']
+  var lat_lng = $("#map_canvas").data('map-canvas');
+  var lati = lat_lng['lat']
+  var longi = lat_lng['lng']
 
 	function initialize() {
-        var mapOptions = {
-          center: { lat: lati, lng: longi},
-          zoom: 1
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-
-      var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(lati, longi),
-          map: map,
-      });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
+    var mapOptions = {
+      center: { lat: lati, lng: longi},
+      zoom: 5
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(lati, longi),
+        map: map,
+    });
+  }
+  
+  $(document).ready(function() {
+    initialize();
+  });
 </script>
 <h4><%= link_to 'Stalk a new one', pokemon_path(Pokemon.all.sample(1)) %></h4>
