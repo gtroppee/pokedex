@@ -29,8 +29,12 @@ class Pokemon < ActiveRecord::Base
   end
 
   def evolutions
-    return [] if data['evolutions'].empty?
-    data['evolutions'].map{|e| Pokemon.find_by(name: e['to'])}
+    return [] if self.data['evolutions'].empty?
+    return [] if self.to_s.empty?
+    return [] if self.avatar.empty?
+
+    pok = data['evolutions'][0]['to']
+    return Pokemon.find_by(name: pok)
   end
 
   def voted_by(ip_adress)

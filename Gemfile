@@ -15,6 +15,10 @@ group :development do
   gem 'binding_of_caller'
 end
 
+# group :production do
+#   # bundle exec rake doc:rails generates the API under doc/api.
+#   gem 'pg'
+# end
 gem 'will_paginate-bootstrap'
 
 # Use SCSS for stylesheets
