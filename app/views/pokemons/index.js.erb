@@ -1,5 +1,6 @@
 <% @pokemons.each do |pokemon| %>
-  $('.pokemon-list').append('<%= j render pokemon %>');
+  $('.pokemon-list').append('<div id="pokemon-<%= pokemon.pkdx_id %>"></div>');
+  $('#pokemon-<%= pokemon.pkdx_id %>').html('<%= j render pokemon %>');
 <% end %>
 
 <% if @pokemons.try(:next_page) %>

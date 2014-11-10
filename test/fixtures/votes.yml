@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pokemon_id: 
+  ip_adress: MyString
+  rating: 1
+
+two:
+  pokemon_id: 
+  ip_adress: MyString
+  rating: 1

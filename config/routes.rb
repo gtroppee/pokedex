@@ -10,6 +10,7 @@ Pokedex::Application.routes.draw do
   resources :pokemons do
     collection do
       get :random
+      get :market
     end
     member do
       put :vote

@@ -1,7 +1,12 @@
 <div class="row">
-  <ul class="pokemon-list">
-    <%= render @pokemons %>
-  </ul>
+
+  <div class="pokemon-list">
+    <% @pokemons.each do |p| %>
+      <div  id="pokemon-<%= p.pkdx_id %>"> 
+        <%= render p %>
+      </div>
+    <% end %>
+   </div>
   <%= will_paginate @pokemons %>
 </div>
 

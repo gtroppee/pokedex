@@ -33,4 +33,22 @@ namespace :pk do
     puts "--------- Task complete ---------"
     puts "--------- #{Pokemon.count} pokemons imported ---------"
   end
+
+  task vote: :environment do
+    ActiveRecord::Base.transaction do
+      50.times do |voter|
+
+        voter = (0...5).map { ('a'..'z').to_a[rand(26)] }.join
+        60.times do
+          poke_id = 4200 + rand(800)
+          Vote.create(
+            pokemon_id: poke_id,
+            ip_adress: voter,
+            rating: 1 + rand(5)
+            )
+        end
+      end
+    end
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104162851) do
+ActiveRecord::Schema.define(version: 20141110075207) do
 
   create_table "pokemons", force: true do |t|
     t.datetime "created_at"
@@ -20,5 +20,15 @@ ActiveRecord::Schema.define(version: 20141104162851) do
     t.string   "avatar"
     t.integer  "pkdx_id"
   end
+
+  create_table "votes", force: true do |t|
+    t.integer  "pokemon_id"
+    t.string   "ip_address"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["pokemon_id"], name: "index_votes_on_pokemon_id"
 
 end

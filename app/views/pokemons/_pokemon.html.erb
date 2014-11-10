@@ -1,24 +1,91 @@
-<div class="col-xs-6 col-md-3 pokemon-item" style="height: 300px;" data-pokemon-id="<%= pokemon.pkdx_id %>">
-  <p><%= link_to pokemon.name, pokemon_path(pokemon) %> </p>
-  <%= image_tag pokemon.avatar %>
+<div class="col-xs-6 col-md-3 pokemon-item" 
+     style="height: 300px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; background-color: rgba(60, 60, 60, 0.2); width: auto; margin: 30px;"
+     data-pokemon-id="<%= pokemon.pkdx_id %>">
+  <h4 style="border-radius: 10px; background-color: rgba(255, 255, 255, 1); padding:5px; text-align:center"><%= link_to pokemon.name, pokemon_path(pokemon) %> </h4>
+  <div data-toggle="modal"
+     data-target="#modal<%= pokemon.pkdx_id %>">
+     <%= image_tag pokemon.avatar %>
+  </div>
   <p>
     <a href="#" class="btn btn-primary" role="button">Like</a> 
     <a href="#" class="btn btn-danger" role="button">Dislike</a>
   </p>
-  <div class="rating"></div>
-
-  <% pokemon.types.each do |type| %>
-  <span class="badge <%= type %>"><%= type %></span>
-  <% end %>
+  <%=  pokemon.voted_by(request.remote_ip) %>
+	  <div class="rating"></div>
 </div>
 
-<script type="text/javascript">
-  $('.rating').raty();
 
-  $('.rating img').click(function(){
+
+<!-- Modal -->
+<div class="modal fade" id="modal<%= pokemon.pkdx_id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel"><%= pokemon.name %></h3>
+<% if false %>
+        <% desc = pokemon.data['descriptions'][0]['resource_uri'] %>
+        <% desc = HTTParty.get("http://pokeapi.co#{desc}")['description'] %>
+        <h5 style=" font-style: italic;"> <%= desc %> </h5>
+<% end %>
+      </div>
+      <div class="modal-body">
+
+        <!-- Single button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Properties <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" style="padding-left:15px">
+            <% pokemon['data'].each do |k, v| %>
+              <% unless v.is_a?(Array) || v == '' || k == 'created' || k == 'modified' || k == 'resource_uri' ||
+                k == 'name'  || k == 'national_id' || k == 'pkdx_id' %>
+                <li> <%= k.humanize %> : <%= v %> </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+        <h4>Evolution :</h4>
+        <% if pokemon.data['evolutions'].any? %>
+          <ul style="list-style: none;">
+            <li class="evolution"><%= image_tag pokemon.avatar, size: "120x120" %> </li>
+            <li class="evolution"><%= image_tag("http://www.wifuproject.com/Webdocumentaitre/Medias/Photos/cercle--fleche-droite_318-26614.png", size: "36x36") %> </li>
+ <% if false %>
+        <% if pokemon.data['evolutions'].any? %>
+          <% poke_next = pokemon.data['evolutions'][0]['to'] %>
+          <% poke_next = Pokemon.find {|p| p['data']['name'] == poke_next } %>
+        <% end %>
+            <li class="evolution"><%= image_tag poke_next['avatar'], size: "120x120" %> </li>          
+<% end %>
+          </ul>
+          <% else %>
+            <h5>is done !</h5>
+        <% end %>
+        <h4><%= pluralize(pokemon.data['types'].count, 'Type') %> : </h4>
+        <ul style="list-style: none;">
+          <% pokemon.data['types'].each do |t| %>
+            <li> <span class="badge <%= t['name'].capitalize %>"><%= t['name'].capitalize %></span></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $('#pokemon-<%= pokemon.pkdx_id %> .rating').raty({ score: <%= pokemon.rating %> });
+
+  $('#pokemon-<%= pokemon.pkdx_id %> .rating img').click(function(){
     rating      = $(this).attr('alt');
     pokemon_id  = $(this).parents(".pokemon-item").data('pokemon-id')
     url = '/pokemons/'+ pokemon_id +'/vote'
     voteForPokemon(url, rating);
   });
 </script>
+
+

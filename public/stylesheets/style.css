@@ -11,28 +11,29 @@ li {
 }
 */
 
-div .random_style  {
-	background-color: rgba(0, 0, 255, 0.5);
-	border-radius: 0.5 0.5;
+
+
+li.evolution {
+	display: inline-block;
+	margin: 5px; 
 }
-/*
-	normal = (134,190,203, 0.5)
-	Fighting = (254,129,129, 0.5)
-	flying  (99,172,229)
-	poison (111,203,159, 0.5)
-	ground = (174,90,65, 0.5)
-	rock  	(195,203,113, 0.5)
-	bug  	(164,124,72, 0.5)
-	ghost   	(212,216,212, 0.5)
-	steel (170,170,170, 0.5)
-	fire (243,119,53, 0.5)
-	water (27,133,184, 0.5)
-	grass (0,255,131, 0.5)
-	electric (234,214,28, 0.5)
-	ice  	(223,227,238, 0.5)
-	dragon  	(0,210,127, 0.5)
-	dark (51,51,51, 0.5)
-	fairy (239,187,255, 0.5)
-	unknow (153,153,153, 0.5)
-	shadow 	(153,153,153, 0.5)
-	psychic  	(190,41,236, 0.5)*/
+.badge.Normal { background-color: rgba(134,134,134, 0.5); } 
+.badge.Fighting { background-color: rgba(254,129,129, 1); }
+.badge.Flying { background-color: rgba(99,172,229, 0.8); }
+.badge.Poison { background-color: rgba(102, 51, 153, 0.5); } 
+.badge.Ground { background-color: rgba(174,90,65, 0.9); } 
+.badge.Rock { background-color: rgba(195,203,113, 1); } 
+.badge.Bug { background-color: rgba(164,124,72, 0.5); } 
+.badge.Ghost { background-color: rgba(190,190,190, 1); } 
+.badge.Steel { background-color: rgba(170,170,170, 0.5); } 
+.badge.Fire { background-color: rgba(250,119,53, 1); } 
+.badge.Water { background-color: rgba(27,133,184, 0.5); } 
+.badge.Grass { background-color: rgba(0,210,127, 0.5); } 
+.badge.Electric { background-color: rgba(234,214,28, 0.5); } 
+.badge.Ice { background-color: rgba(180, 216, 180, 1); } 
+.badge.Dragon { background-color: rgba(250, 0, 0, 0.5); } 
+.badge.Dark { background-color: rgba(51,51,51, 0.5); } 
+.badge.Fairy { background-color: rgba(239,187,255, 1); } 
+.badge.Unknown { background-color: rgba(153,153,153, 0.5); } 
+.badge.Shadow { background-color: rgba(153,153,153, 0.5); } 
+.badge.Psychic { background-color: rgba(190,41,236, 0.5); }
