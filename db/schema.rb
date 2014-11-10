@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110075207) do
+ActiveRecord::Schema.define(version: 20141110112146) do
 
   create_table "pokemons", force: true do |t|
     t.text     "data"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20141110075207) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "latitude"
+    t.string   "longitude"
   end
 
   create_table "votes", force: true do |t|

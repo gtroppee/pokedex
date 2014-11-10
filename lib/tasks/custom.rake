@@ -1,12 +1,20 @@
 namespace :pk do
 
+  def random_longitude
+    rand(-180.000000000...180.000000000)
+  end
+
+  def random_latitude
+    rand(-90.000000000...90.000000000)
+  end
+
   desc "fetch data fron API and populate DB"
   task  populate: :environment do
 
     API = "http://pokeapi.co"
     progress = ProgressBar.create(title: 'Pokemons', starting_at: 0, total: 778)
     Pokemon.destroy_all
-    16.times do |i|
+    1.times do |i|
       limit = 50
       pokemons = HTTParty.get("#{API}/api/v1/pokemon?limit=#{limit}&offset=#{limit * i}")['objects']
       # binding.pry
@@ -22,7 +30,9 @@ namespace :pk do
             data: data, 
             avatar: avatar, 
             pkdx_id: data['pkdx_id'],
-            name: data['name']
+            name: data['name'],
+            latitude: random_latitude,
+            longitude: random_longitude
           )
           
           progress.increment
@@ -56,6 +66,7 @@ namespace :pk do
     `rake db:create:all`
     `rake db:migrate`
     `rake pk:populate`
+    `rake pk:vote`
   end
 
 end

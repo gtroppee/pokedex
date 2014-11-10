@@ -2,7 +2,15 @@ class Pokemon < ActiveRecord::Base
   has_many :votes
   serialize :data, Hash
 
+  ATTRIBUTES = %w()
+
   self.per_page = 20
+
+  ATTRIBUTES.each do |attr|
+    define_method(attr) do
+      data[attr]
+    end
+  end
 
   def to_s
     name
@@ -23,15 +31,6 @@ class Pokemon < ActiveRecord::Base
   def evolutions
     return [] if data['evolutions'].empty?
     data['evolutions'].map{|e| Pokemon.find_by(name: e['to'])}
-  end
-
-  def method_missing(method_name)
-    super unless data.has_key?("#{method_name}")
-    data["#{method_name}"]
-  end
-
-  def respond_to_missing?(method_name, include_private = false)
-    data.has_key?("#{method_name}") || super
   end
 
   def voted_by(ip_adress)
