@@ -69,4 +69,12 @@ namespace :pk do
     `rake pk:vote`
   end
 
+  task reset_heroku: :environment do
+    `heroku run rake db:drop:all`
+    `heroku run rake db:create:all`
+    `heroku run rake db:migrate`
+    `heroku run rake pk:populate`
+    `heroku run rake pk:vote`
+  end
+
 end
