@@ -4,12 +4,25 @@ class Pokemon < ActiveRecord::Base
 
   self.per_page = 20
 
+  def to_s
+    name
+  end
+
+  def self.top_rated(limit = 7)
+    Pokemon.all.sort_by{|p| p.rating }.reverse.first(limit)
+  end
+
   def type_string
     types.join(' ')
   end
 
   def types
     data['types'].map{|t| t['name']}
+  end
+
+  def evolutions
+    return [] if data['evolutions'].empty?
+    data['evolutions'].map{|e| Pokemon.find_by(name: e['to'])}
   end
 
   def method_missing(method_name)
@@ -27,7 +40,7 @@ class Pokemon < ActiveRecord::Base
 
   def rating
     votes_count = votes.size.zero? ? 1 : votes.size
-    votes.sum(:rating) / votes_count
+    "%0.1f" % (votes.sum(:rating).to_f / votes_count)
   end
 
 end

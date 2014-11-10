@@ -14,11 +14,12 @@
 ActiveRecord::Schema.define(version: 20141110075207) do
 
   create_table "pokemons", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.text     "data"
     t.string   "avatar"
     t.integer  "pkdx_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "votes", force: true do |t|

@@ -32,17 +32,13 @@ class PokemonsController < ApplicationController
     end
   end
 
-  # def market
-  #   @top_vote = Vote.select('ip_adress, pokemon_id').group('pokemon_id').count
-  #   @top_vote = @top_vote.sort_by {|k, v| v}.reverse.first(10)
-
-  #   @pokemons = Pokemon.find_by(:data => ['name'] params[:id])
-  #   # @top_vote.each do |k, v|
-  #   #   Vote.where(pokemon_id: k).sum(rating:) / v
-  #   #   puts " k = v "
-  #   #   binding.pry
-  #   # end
-
-  # end
+  def market
+    @top_rated =  Pokemon.top_rated.map do |pokemon|
+      {
+        pokemon: pokemon.to_s,
+        rating: pokemon.rating
+      }
+    end
+  end
 
 end

@@ -1,21 +1,22 @@
 <div id="top_rated" style="height: 250px;"></div>
 
+<div id="top-rated" data-top-rated="<%= @top_rated.to_json %>"></div>
+
+<ol>
+	<% @top_rated.each do |pokemon| %>
+	<li><%= pokemon %></li>
+	<% end %>
+</ol>
+
 <script type="text/javascript">
+	var data = $("#top-rated").data('top-rated');
 
 	Morris.Bar({
 	  element: 'top_rated',
-	  data: [
-	    { y: '2006', a: 100, b: 90 },
-	    { y: '2007', a: 75,  b: 65 },
-	    { y: '2008', a: 50,  b: 40 },
-	    { y: '2009', a: 75,  b: 65 },
-	    { y: '2010', a: 50,  b: 40 },
-	    { y: '2011', a: 75,  b: 65 },
-	    { y: '2012', a: 100, b: 90 }
-	  ],
-	  xkey: 'y',
-	  ykeys: ['a'],
-	  labels: ['Series A', 'Series B']
+	  data: data,
+	  xkey: 'pokemon',
+	  ykeys: ['rating'],
+	  labels: ['Rating']
 	});
 </script>
 

@@ -10,8 +10,8 @@
     <a href="#" class="btn btn-primary" role="button">Like</a> 
     <a href="#" class="btn btn-danger" role="button">Dislike</a>
   </p>
-  <%=  pokemon.voted_by(request.remote_ip) %>
-	  <div class="rating"></div>
+  <%= pluralize(pokemon.votes.size, 'Vote') %>
+	<div class="rating"></div>
 </div>
 
 
@@ -46,22 +46,18 @@
           </ul>
         </div>
 
-        <h4>Evolution :</h4>
-        <% if pokemon.data['evolutions'].any? %>
-          <ul style="list-style: none;">
-            <li class="evolution"><%= image_tag pokemon.avatar, size: "120x120" %> </li>
-            <li class="evolution"><%= image_tag("http://www.wifuproject.com/Webdocumentaitre/Medias/Photos/cercle--fleche-droite_318-26614.png", size: "36x36") %> </li>
- <% if false %>
-        <% if pokemon.data['evolutions'].any? %>
-          <% poke_next = pokemon.data['evolutions'][0]['to'] %>
-          <% poke_next = Pokemon.find {|p| p['data']['name'] == poke_next } %>
+        <h4>Evolutions :</h4>
+
+        <ul style="list-style: none;">
+
+          <li class="evolution"><%= image_tag pokemon.avatar, size: "120x120" %> </li>
+
+        <% pokemon.evolutions.each do |evol| %>
+          <li class="evolution"><%= image_tag("http://www.wifuproject.com/Webdocumentaitre/Medias/Photos/cercle--fleche-droite_318-26614.png", size: "36x36") %> </li>
+          <li class="evolution"><%= image_tag evol.avatar, size: "120x120" %> </li>
         <% end %>
-            <li class="evolution"><%= image_tag poke_next['avatar'], size: "120x120" %> </li>          
-<% end %>
-          </ul>
-          <% else %>
-            <h5>is done !</h5>
-        <% end %>
+
+        </ul>
         <h4><%= pluralize(pokemon.data['types'].count, 'Type') %> : </h4>
         <ul style="list-style: none;">
           <% pokemon.data['types'].each do |t| %>

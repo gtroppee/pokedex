@@ -21,7 +21,8 @@ namespace :pk do
           Pokemon.create(
             data: data, 
             avatar: avatar, 
-            pkdx_id: data['pkdx_id']
+            pkdx_id: data['pkdx_id'],
+            name: data['name']
           )
           
           progress.increment
@@ -39,16 +40,22 @@ namespace :pk do
       50.times do |voter|
 
         voter = (0...5).map { ('a'..'z').to_a[rand(26)] }.join
-        60.times do
-          poke_id = 4200 + rand(800)
+        3.times do
           Vote.create(
-            pokemon_id: poke_id,
-            ip_adress: voter,
-            rating: 1 + rand(5)
-            )
+            pokemon: Pokemon.where(pkdx_id: (1..20)).sample,
+            ip_address: voter,
+            rating: (1..5).to_a.sample
+          )
         end
       end
     end
+  end
+
+  task reset: :environment do
+    `rake db:drop:all`
+    `rake db:create:all`
+    `rake db:migrate`
+    `rake pk:populate`
   end
 
 end
