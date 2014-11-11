@@ -67,6 +67,8 @@ namespace :pk do
     `rake db:migrate`
     `rake pk:populate`
     `rake pk:vote`
+    `rake assets:clobber`
+    `rake assets:precompile RAILS_ENV=production`
   end
 
   task reset_heroku: :environment do
