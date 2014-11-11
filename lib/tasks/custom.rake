@@ -30,9 +30,7 @@ namespace :pk do
             data: data, 
             avatar: avatar, 
             pkdx_id: data['pkdx_id'],
-            name: data['name'],
-            latitude: random_latitude,
-            longitude: random_longitude
+            name: data['name']
           )
           
           progress.increment
@@ -55,6 +53,19 @@ namespace :pk do
             pokemon: Pokemon.where(pkdx_id: (1..20)).sample,
             ip_address: voter,
             rating: (1..5).to_a.sample
+          )
+        end
+      end
+    end
+  end
+
+  task reports: :environment do
+    ActiveRecord::Base.transaction do
+      Pokemon.find_each do |pokemon|
+        3.times do
+          pokemon.reports.create(
+            latitude: random_latitude,
+            longitude: random_longitude
           )
         end
       end

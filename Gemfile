@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
+gem 'active_model_serializers'
 
 # Use sqlite3 as the database for Active Record
 gem 'httparty'
@@ -13,6 +14,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+gem 'geocoder'
 
 group :development, :test do
   gem 'sqlite3'

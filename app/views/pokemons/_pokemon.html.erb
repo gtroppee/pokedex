@@ -7,8 +7,7 @@
      <%= image_tag pokemon.avatar %>
   </div>
   <p>
-    <a href="#" class="btn btn-primary" role="button">Like</a> 
-    <a href="#" class="btn btn-danger" role="button">Dislike</a>
+    <%= button_to('Report', reports_path(pokemon: pokemon), class: 'btn btn-danger col-sm-12') %>
   </p>
   <%= pluralize(pokemon.votes.size, 'Vote') %>
 	<div class="rating"></div>

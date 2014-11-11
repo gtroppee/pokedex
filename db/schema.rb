@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110201808) do
+ActiveRecord::Schema.define(version: 20141111101842) do
 
   create_table "pokemons", force: true do |t|
     t.text     "data"
@@ -21,10 +21,17 @@ ActiveRecord::Schema.define(version: 20141110201808) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vote_count"
-    t.float    "latitude",    limit: 255
-    t.float    "longitude",   limit: 255
-    t.text     "description"
   end
+
+  create_table "reports", force: true do |t|
+    t.integer  "pokemon_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reports", ["pokemon_id"], name: "index_reports_on_pokemon_id"
 
   create_table "votes", force: true do |t|
     t.integer  "pokemon_id"

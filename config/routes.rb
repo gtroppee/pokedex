@@ -17,6 +17,7 @@ Pokedex::Application.routes.draw do
     end
   end
   resources :poke_types
+  resources :reports
 
   root "pokemons#index"
 

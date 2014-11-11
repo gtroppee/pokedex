@@ -2,8 +2,8 @@
 <div id="map-canvas" style="height: 350px; weigth:350px; margin: 10px;"></div>
 
 <script type="text/javascript" >
-  var lati = <%= @pok.latitude %>
-  var longi = <%= @pok.longitude %>
+  var lati = <%= @pok.reports.last.latitude %>
+  var longi = <%= @pok.reports.last.longitude %>
 
 	function initialize() {
     var mapOptions = {
@@ -11,10 +11,13 @@
       zoom: 5
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(lati, longi),
+
+    <% @pok.reports.each do |report| %>
+      new google.maps.Marker({
+        position: new google.maps.LatLng(<%= report.latitude %>, <%= report.longitude %>),
         map: map,
-    });
+      });
+    <% end %>
   }
 
   $(document).ready(function() {

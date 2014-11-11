@@ -10,6 +10,10 @@ module Api
       def show
         respond_with Pokemon.find_by(pkdx_id: params[:id])
       end
+
+      def default_serializer_options  
+        {root: false}  
+      end 
     end
   end
 end

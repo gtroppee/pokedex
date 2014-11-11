@@ -1,5 +1,6 @@
 class Pokemon < ActiveRecord::Base
   has_many :votes
+  has_many :reports
   serialize :data, Hash
 
   ATTRIBUTES = %w()
