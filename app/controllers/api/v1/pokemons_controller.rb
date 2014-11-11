@@ -4,7 +4,7 @@ module Api
       respond_to :json
 
       def index
-        respond_with Pokemon.first(20)
+        respond_with Pokemon.first(5)
       end
 
       def show
