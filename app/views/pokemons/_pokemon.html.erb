@@ -51,11 +51,10 @@
         <ul style="list-style: none;">
 
           <li class="evolution"><%= image_tag pokemon.avatar, size: "120x120" %> </li>
-<% if false %>
-        <% pokemon.evolutions.each do |evol| %>
+
+        <% pokemon.evolutions do |evol| %>
           <li class="evolution"><%= image_tag("http://www.wifuproject.com/Webdocumentaitre/Medias/Photos/cercle--fleche-droite_318-26614.png", size: "36x36") %> </li>
           <li class="evolution"><%= image_tag evol.avatar, size: "120x120" %> </li>
-        <% end %>
         <% end %>
 
         </ul>

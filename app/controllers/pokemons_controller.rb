@@ -39,14 +39,5 @@ class PokemonsController < ApplicationController
         rating: pokemon.rating
       }
     end
-          # binding.pry
-
   end
-
-  # private
-  #   def pkdx_id_param
-  #     params.require(:pokemon).permit(:pkdx_id)
-  #   end
-
-
 end

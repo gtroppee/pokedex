@@ -61,6 +61,28 @@ namespace :pk do
     end
   end
 
+  task desc: :environment do
+
+    API = "http://pokeapi.co"
+    progress = ProgressBar.create(title: 'update description', starting_at: 0, total: 778)
+    pokemons = Pokemon.all
+    ActiveRecord::Base.transaction do
+      pokemons.each do |p|
+        if p.data['descriptions'][0]['resource_uri'].empty?
+          desc = "No life, nothing to tell about him"
+        else
+          des = p.data['descriptions'][0]['resource_uri']
+          desc = HTTParty.get("#{API}#{des}")['description']
+        end
+        Pokemon.update(p.id,
+          description: desc
+        )
+
+        progress.increment
+      end
+    end
+  end
+
   task reset: :environment do
     `rake db:drop:all`
     `rake db:create:all`
@@ -71,7 +93,7 @@ namespace :pk do
     `rake assets:precompile RAILS_ENV=production`
   end
 
-  task reset_heroku: :environment do
+  task reset_heroku: :production do
     `heroku run rake db:drop:all`
     `heroku run rake db:create:all`
     `heroku run rake db:migrate`

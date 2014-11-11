@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110112146) do
+ActiveRecord::Schema.define(version: 20141110201808) do
 
   create_table "pokemons", force: true do |t|
     t.text     "data"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(version: 20141110112146) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vote_count"
-    t.string   "latitude"
-    t.string   "longitude"
+    t.float    "latitude",    limit: 255
+    t.float    "longitude",   limit: 255
+    t.text     "description"
   end
 
   create_table "votes", force: true do |t|
