@@ -1,11 +1,10 @@
 module Api
   module V1
     class PokemonsController < ApplicationController
-      
       respond_to :json
 
       def index
-        respond_with Pokemon.all
+        respond_with Pokemon.first(20)
       end
 
       def show
