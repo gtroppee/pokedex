@@ -1,6 +1,11 @@
 class PokemonsController < ApplicationController
   def index
-  	@pokemons = Pokemon.all.order('pkdx_id ASC').paginate(page: params[:page])
+    if params[:user_id].present?
+      user = User.find(params[:user_id])
+      @pokemons = user.pokemons.order('pkdx_id ASC').paginate(page: params[:page])
+    else
+      @pokemons = Pokemon.all.order('pkdx_id ASC').paginate(page: params[:page])
+    end
 
     respond_to do |format|
       format.html

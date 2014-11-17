@@ -16,19 +16,23 @@ class UserPokemonsController < ApplicationController
   end
 
   def create
-    ids = params['pokemon_ids'].split(',')
-    user = current_user
+    ids = params['pokemon_ids'].split(',').map(&:to_i)
+    return @limit_reached = true if ids.size > 30
+
+    current_user.user_pokemons.delete_all #TODO find a better way to do this shit
 
     ids.each do |id|
       pokemon = Pokemon.find_by_id(id)
       @selection = UserPokemon.create(
-      	user_id: user.id,
+      	user_id:    current_user.id,
       	pokemon_id: pokemon.id,
-        attack: pokemon.data['attack'],
-        defense: pokemon.data['defense']
+        attack:     pokemon.data['attack'],
+        defense:    pokemon.data['defense']
       	)
     end
-    redirect_to user_pokemon_path(pokemon.id)
-  end
 
+    respond_to do |format|
+      format.js
+    end
+  end
 end

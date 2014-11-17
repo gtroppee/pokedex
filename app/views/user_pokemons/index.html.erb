@@ -1,5 +1,5 @@
 <div class="page-header">
-  <%= link_to 'Add Poke', '#', class: 'btn btn-primary', id: 'add-poke', method: :post %>
+  <%= link_to 'Add Poke', '#', class: 'btn btn-primary', id: 'add-poke' %>
 </div>
 
 <div class="row">
@@ -42,8 +42,6 @@
 
     $('#add-poke').click(function(){
       pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){return item.getAttribute('data-pokemon-id'); });
-      
-      console.log(pokmemon_ids);
       addPoke(pokmemon_ids);
     });
 </script>
