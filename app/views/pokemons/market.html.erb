@@ -2,15 +2,9 @@
 
 <div id="top-rated" data-top-rated="<%= @top_rated.to_json %>"></div>
 
-<ol>
-	<% @top_rated.each do |pokemon| %>
-	<li><%= pokemon %></li>
-	<% end %>
-</ol>
 
 <script type="text/javascript">
 	var data = $("#top-rated").data('top-rated');
-alert(data[0])
 	Morris.Bar({
 	  element: 'top_rated',
 	  data: data,

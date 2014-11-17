@@ -13,7 +13,7 @@ module Api
 
       def default_serializer_options  
         {root: false}  
-      end 
+      end
     end
   end
 end

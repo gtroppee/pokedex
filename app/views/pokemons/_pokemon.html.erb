@@ -4,16 +4,17 @@
   <h4 style="border-radius: 10px; background-color: rgba(255, 255, 255, 1); padding:5px; text-align:center"><%= link_to pokemon.name, pokemon_path(pokemon)  %> </h4>
   <div data-toggle="modal"
      data-target="#modal<%= pokemon.pkdx_id %>">
-     <%= image_tag pokemon.avatar %>
+     <%= image_tag(pokemon.avatar, size: '120x120') %>
   </div>
   <p>
     <%= button_to('Report', reports_path(pokemon: pokemon), class: 'btn btn-danger col-sm-12') %>
   </p>
+  <p>
+    <%= button_to('Select', user_pokemons_path(pokemon: pokemon), class: 'btn btn-primary col-sm-12') %>
+  </p>
   <%= pluralize(pokemon.votes.size, 'Vote') %>
 	<div class="rating"></div>
 </div>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="modal<%= pokemon.pkdx_id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

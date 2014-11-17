@@ -1,0 +1,2 @@
+module UserPokemonsHelper
+end

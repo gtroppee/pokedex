@@ -94,6 +94,17 @@ namespace :pk do
     end
   end
 
+  # task team: environment do
+
+  #   poketypes = HTTParty.get("http://pokeapi.co/api/v1/type?limit=0")['objects']['name']
+  #   nb_types = poketypes.count
+  #   ActiveRecord::Base.transaction do
+  #     Team.create(
+  #       type_team: 
+  #       )
+  #   end
+  # end
+
   task reset: :environment do
     `rake db:drop:all`
     `rake db:create:all`

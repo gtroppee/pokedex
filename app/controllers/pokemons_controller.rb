@@ -10,7 +10,6 @@ class PokemonsController < ApplicationController
 
   def show
     @pok = Pokemon.find_by(id: params[:id])
-    binding.pry
   end
 
   def random

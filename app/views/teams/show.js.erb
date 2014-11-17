@@ -1,0 +1,10 @@
+<% @pokemons.each do |pokemon| %>
+  $('.pokemon-list').append('<div id="poke_team-<%= pokemon.pkdx_id %>"></div>');
+  $('#pokeball-<%= pokemon.pkdx_id %>').html('<%= j render pokemon %>');
+<% end %>
+
+<% if @pokemons.try(:next_page) %>
+  $('.pagination').replaceWith('<%= j will_paginate(@pokemons) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

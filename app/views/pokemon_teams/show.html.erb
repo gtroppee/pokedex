@@ -1,0 +1,18 @@
+<h1>PokemonTeams#show</h1>
+<h2> <%= @team.type_team %>'s team compostion</h2>
+<% @pokes.each do |p| %>
+	<ul style="list-style: none; display:inline-block">
+		<li><%= p.name %></li>
+		<li><%= image_tag(p.avatar, size: "120x12O") %></li>
+		<li>Attack : <%= p.data['attack'] %></li>
+		<li>Defense : <%= p.data['defense'] %></li>
+	</ul>
+<% end %>
+
+<div class="jumbotron">
+	<ul style="list-style: none; display:inline-block; padding:auto">
+		<li class="evolution"><%= link_to 'Back', show_all_teams_path %></li>
+		<li class="evolution"><%= image_tag("https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/edit.png", size: '40x40') %> </li>
+		<li class="evolution"><%= image_tag("http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png", size: '40x40') %></li>
+	</ul>
+</div>

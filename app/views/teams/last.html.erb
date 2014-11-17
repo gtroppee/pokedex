@@ -1,0 +1,21 @@
+<% @teams.each do |t| %>
+  <% attack = 0 %>
+  <% defense = 0 %>
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Team <%= t.type_team %> created by <%= user_name(t.user_id) %></h3>
+	  </div>
+	  <div class="panel-body">
+	    <% pokemon_in_team(t.id).each do |p| %>
+	    	<%= p.name %>
+	    	<%= image_tag(p.avatar, size:'120x120') %>
+	    	<% attack += p.data['attack']%>
+	    	<% defense += p.data['defense'] %>
+	    <% end %>
+	    <ul style="list-style: none; text-align:right; margin:auto;">
+	    	<li>Attack = <%= attack %></li>
+	    	<li>Defense = <%= defense %></li>
+	    </ul>
+	  </div>
+	</div>
+<% end %>

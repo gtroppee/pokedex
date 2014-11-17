@@ -1,0 +1,9 @@
+<h3>Tu as <%= pluralize(@pokemons.count, 'Pokemon') %> </h3>
+<h2> <%= @new_poke.to_s %> joins your team</h2>
+<%= image_tag(@new_poke.avatar, size: '120x120') %>
+
+	<ul style='list-style: none;'>
+		<% @pokes.each do |p| %>
+		<li style='display:inline'><%= image_tag(p.avatar, size: '120x120') %></li>
+		<% end %>
+	</ul>

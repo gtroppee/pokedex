@@ -1,12 +1,20 @@
 Pokedex::Application.routes.draw do
 
+  root "pokemons#index"
+
+  resources :pokemon_teams
+  resources :poke_types, only: [:index, :show]
+  resources :reports
+  resources :user_pokemons
+  devise_for :users
+
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       resources :pokemons, only: [:index, :show]
+      resources :users
     end
   end
 
-  resources :poke_types, only: [:index, :show]
   resources :pokemons do
     collection do
       get :random
@@ -16,10 +24,15 @@ Pokedex::Application.routes.draw do
       put :vote
     end
   end
-  resources :poke_types
-  resources :reports
 
-  root "pokemons#index"
+  resources :teams do
+    collection do
+      get :show_all
+      get :last
+    end
+  end
+
+
 
   # match "pokemons/random", to: "pokemons#random", via: :get
   # The priority is based upon order of creation: first created -> highest priority.

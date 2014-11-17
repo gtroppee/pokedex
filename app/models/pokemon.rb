@@ -1,6 +1,11 @@
 class Pokemon < ActiveRecord::Base
   has_many :votes
   has_many :reports
+  has_many :users
+  has_many :user_pokemons, through: :users
+  has_many :teams
+  has_many :pokemons_teams, through: :teams
+
   serialize :data, Hash
 
   ATTRIBUTES = %w()

@@ -1,0 +1,15 @@
+<table class="table">
+<% @teams.each do |t| %>
+	<tr>
+		<td> <%= t.type_team %> 
+		</td>
+		<td> <%= link_to image_tag("https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/eye-512.png", size: '20x20'), pokemon_team_path(t.id) %> 
+		</td>
+		<td> <%= image_tag("https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/edit.png", size: '20x20') %> 
+		</td>
+		<td> <%= image_tag("http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png", size: '20x20') %>  
+		</td>
+	</tr>
+
+<% end %>
+</table>

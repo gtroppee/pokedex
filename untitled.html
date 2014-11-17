@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Test CCM</title>
+		<script language="javascript">
+
+		function ChangeImage(url) {
+			document.getElementById("img").src = url;
+		}
+
+		</script> 
+	</head>
+	<body>
+		<img id="img" src="http://www.nintendo-master.com/zone_membres/image/logo01.jpg"/>
+		<table>
+			<tr>
+				<td><img onClick="ChangeImage(this.src);" src="http://www.nintendo-master.com/zone_membres/image/logo25.jpg"/></td>
+				<td><img onClick="ChangeImage(this.src);" src="http://forum.ubuntu-fr.org/img/avatars/32704.jpg"/></td>
+			</tr>
+		</table>
+	</body>
+</html>

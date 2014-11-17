@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div class="modal fade" id="modal<%= pokemon.pkdx_id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel"><%= pokemon.name %></h3>
+<% if false %>
+        <% desc = pokemon.data['descriptions'][0]['resource_uri'] %>
+        <% desc = HTTParty.get("http://pokeapi.co#{desc}")['description'] %>
+        <h5 style=" font-style: italic;"> <%= desc %> </h5>
+<% end %>
+      </div>
+      <div class="modal-body">
+
+        <!-- Single button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Properties <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" style="padding-left:15px">
+            <% pokemon['data'].each do |k, v| %>
+              <% unless v.is_a?(Array) || v == '' || k == 'created' || k == 'modified' || k == 'resource_uri' ||
+                k == 'name'  || k == 'national_id' || k == 'pkdx_id' %>
+                <li> <%= k.humanize %> : <%= v %> </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+        <h4>Evolutions :</h4>
+
+        <ul style="list-style: none;">
+
+          <li class="evolution"><%= image_tag pokemon.avatar, size: "120x120" %> </li>
+
+        <% pokemon.evolutions do |evol| %>
+          <li class="evolution"><%= image_tag("http://www.wifuproject.com/Webdocumentaitre/Medias/Photos/cercle--fleche-droite_318-26614.png", size: "36x36") %> </li>
+          <li class="evolution"><%= image_tag evol.avatar, size: "120x120" %> </li>
+        <% end %>
+
+        </ul>
+        <h4><%= pluralize(pokemon.data['types'].count, 'Type') %> : </h4>
+        <ul style="list-style: none;">
+          <% pokemon.data['types'].each do |t| %>
+            <li> <span class="badge <%= t['name'].capitalize %>"><%= t['name'].capitalize %></span></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

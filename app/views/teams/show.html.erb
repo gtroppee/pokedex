@@ -1,0 +1,28 @@
+<h2>Add <%= pluralize(limit_poke(@team.id), 'pokemon') %> to your team <%= @team.type_team %>.</h2>
+<div class="row">
+  <div class="pokemon-list">
+    <% @pokemons.each do |poke_team| %>
+      <div  id="poke_team-<%= poke_team.pkdx_id %>"> 
+      	<%= render 'teams/poke_team', poke_team: poke_team %>
+      </div>
+    <% end %>
+  </div>
+  <%= will_paginate @pokemons %>
+</div>
+
+
+<script type="text/javascript">
+	function setUpEndlessScrolling(){
+	    if ($('.pagination').length > 0){
+	      $(window).scroll(function(){
+	        var url = $('.pagination a.next_page').attr('href');
+	        if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
+	          $('.pagination').text("Chargement en cours...");
+	          $.getScript(url);
+	        }
+	      });
+	      $(window).scroll();
+	    }
+  	}
+  	setUpEndlessScrolling();
+</script>

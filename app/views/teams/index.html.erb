@@ -1,0 +1,13 @@
+<div class="jumbotron">
+	<div class="field">
+	  <h1>Choose your Team</h1>
+	  <%= form_for(@team) do |f| %>
+	  	<h3><%= f.label "Select your team's name " %></h3>
+     	<%= f.select(:type_team, options_for_select(@types)) %>
+     	<%= f.hidden_field :user_id, value: @user %>
+     	<div style="text-align:right;">
+			<%= f.submit "Validate", :class => "btn btn-primary btn-lg"%>
+		</div>
+	  <% end %>
+  </div>
+</div>

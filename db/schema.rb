@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111101842) do
+ActiveRecord::Schema.define(version: 20141116112916) do
+
+  create_table "pokemon_teams", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "pokemon_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pokemon_teams", ["pokemon_id"], name: "index_pokemon_teams_on_pokemon_id"
+  add_index "pokemon_teams", ["team_id"], name: "index_pokemon_teams_on_team_id"
 
   create_table "pokemons", force: true do |t|
     t.text     "data"
@@ -21,6 +31,9 @@ ActiveRecord::Schema.define(version: 20141111101842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "vote_count"
+    t.text     "description"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "reports", force: true do |t|
@@ -32,6 +45,48 @@ ActiveRecord::Schema.define(version: 20141111101842) do
   end
 
   add_index "reports", ["pokemon_id"], name: "index_reports_on_pokemon_id"
+
+  create_table "teams", force: true do |t|
+    t.string   "type_team"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+
+  create_table "user_pokemons", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "pokemon_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "type_team"
+  end
+
+  add_index "user_pokemons", ["pokemon_id"], name: "index_user_pokemons_on_pokemon_id"
+  add_index "user_pokemons", ["user_id"], name: "index_user_pokemons_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "age"
+    t.text     "bio"
+    t.boolean  "gender"
+    t.string   "name"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: true do |t|
     t.integer  "pokemon_id"
