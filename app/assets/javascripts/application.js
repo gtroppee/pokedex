@@ -26,3 +26,15 @@ function voteForPokemon(url, rating){
     contentType: "application/javascript",
   });
 }
+
+function addTeam(ids){
+  $.ajax({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader(
+        'X-CSRF-Token', 
+        $('meta[name="csrf-token"]').attr('content'))},
+    url: '/pokemon_teams' + '?pokemon_ids=' + ids,
+    type: "POST",
+    contentType: "application/javascript",
+  });
+}

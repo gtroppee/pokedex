@@ -1,4 +1,5 @@
 <h2>Add <%= pluralize(limit_poke(@team.id), 'pokemon') %> to your team <%= @team.type_team %>.</h2>
+<%= link_to 'Add Team', '#', class: 'btn btn-primary', id: 'add-team' %>
 <div class="row">
   <div class="pokemon-list">
     <% @pokemons.each do |poke_team| %>
@@ -25,4 +26,33 @@
 	    }
   	}
   	setUpEndlessScrolling();
+
+    function notify(){
+      $('body').notifyMe(
+        'bottom', // Position
+        'error', // Type
+        'Lorem Ipsum Text', // Title
+        'Lorem Ipsum is simply dummy text of the printing', // Description
+        200, // Velocity of notification
+        2000 // (optional) Time of delay to close automatically
+      );
+    }
+
+    $('.pokeball-icon').click(function(){selectPokemon($(this));});
+
+    function selectPokemon(element){
+      if(element.parents('.pokemon-item').hasClass('selected')){
+        element.parents('.pokemon-item').removeClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length <= 2){
+        element.parents('.pokemon-item').addClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length > 2){
+        notify();
+      }
+    }
+
+    $('#add-team').click(function(){
+      pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){return item.id;});
+      addTeam(pokmemon_ids)
+      // console.log(pokmemon_ids);
+    });
 </script>
