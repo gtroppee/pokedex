@@ -34,7 +34,7 @@
         'Lorem Ipsum Text', // Title
         'Lorem Ipsum is simply dummy text of the printing', // Description
         200, // Velocity of notification
-        2000 // (optional) Time of delay to close automatically
+        20000 // (optional) Time of delay to close automatically
       );
     }
 
@@ -51,8 +51,8 @@
     }
 
     $('#add-team').click(function(){
-      pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){return item.id;});
+      pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){console.log(item); return item.id;});
       addTeam(pokmemon_ids)
-      // console.log(pokmemon_ids);
+      console.log(pokmemon_ids);
     });
 </script>

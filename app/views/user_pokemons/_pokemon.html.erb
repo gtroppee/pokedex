@@ -1,0 +1,14 @@
+<div class="col-xs-6 col-md-3 pokemon-item" 
+     style="height: 250px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; background-color: rgba(60, 60, 60, 0.2); width: auto; margin: 30px;"
+     data-pokemon-id="<%= pokemon.pkdx_id %>">
+  <div id="<%= pokemon.pkdx_id %>">
+
+    <h4 style="border-radius: 10px; background-color: rgba(255, 255, 255, 1); padding:5px; text-align:center"><%= link_to pokemon.name, pokemon_path(pokemon)  %> </h4>
+    <div>
+       <%= image_tag(pokemon.avatar, size: '120x120', :class => 'pokemon-img') %>
+    </div>
+    <p>
+      <%= button_to('Select', user_pokemons_path(pokemon: pokemon), class: 'btn btn-primary col-sm-12') %>
+    </p>
+   </div>
+  </div>

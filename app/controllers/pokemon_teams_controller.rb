@@ -3,7 +3,7 @@ class PokemonTeamsController < ApplicationController
   include ApplicationHelper
 
   def create
-    binding.pry
+    # binding.pry
   	team = Team.find(params[:team])
   	pokemon = Pokemon.find(params[:pokemon])
   	selection = PokemonTeam.new(

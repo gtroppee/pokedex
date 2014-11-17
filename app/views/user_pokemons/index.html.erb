@@ -1,0 +1,49 @@
+<div class="page-header">
+  <%= link_to 'Add Poke', '#', class: 'btn btn-primary', id: 'add-poke', method: :post %>
+</div>
+
+<div class="row">
+  <div class="pokemon-list">
+    <% @pokemons.each do |pokemon| %>
+      <div  id="pokeselect-<%= pokemon.pkdx_id %>"> 
+        <%= render partial: 'user_pokemons/pokemon', object: pokemon %>
+      </div>
+    <% end %>
+   </div>
+  <%= will_paginate @pokemons %>
+</div>
+
+<script type="text/javascript">
+  function setUpEndlessScrolling(){
+      if ($('.pagination').length > 0){
+        $(window).scroll(function(){
+          var url = $('.pagination a.next_page').attr('href');
+          if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
+            $('.pagination').text("Chargement en cours...");
+            $.getScript(url);
+          }
+        });
+        $(window).scroll();
+      }
+    }
+    setUpEndlessScrolling();
+
+    $('.pokemon-img').click(function(){ addPokemon($(this)); });
+
+    function addPokemon(element){
+      if(element.parents('.pokemon-item').hasClass('selected')){
+        element.parents('.pokemon-item').removeClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length <= 20){
+        element.parents('.pokemon-item').addClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length > 20){
+        notify();
+      }
+    }
+
+    $('#add-poke').click(function(){
+      pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){return item.getAttribute('data-pokemon-id'); });
+      
+      console.log(pokmemon_ids);
+      addPoke(pokmemon_ids);
+    });
+</script>

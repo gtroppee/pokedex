@@ -38,3 +38,15 @@ function addTeam(ids){
     contentType: "application/javascript",
   });
 }
+
+function addPoke(ids){
+  $.ajax({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader(
+        'X-CSRF-Token', 
+        $('meta[name="csrf-token"]').attr('content'))},
+    url: '/user_pokemons' + '?pokemon_ids=' + ids,
+    type: "POST",
+    contentType: "application/javascript",
+  });
+}

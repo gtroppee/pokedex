@@ -1,8 +1,8 @@
 <div class="row">
   <div class="pokemon-list">
-    <% @pokemons.each do |p| %>
-      <div  id="pokemon-<%= p.pkdx_id %>"> 
-        <%= render p %>
+    <% @pokemons.each do |pokemon| %>
+      <div  id="pokemon-<%= pokemon.pkdx_id %>"> 
+        <%= render partial: 'pokemon', object: pokemon, locals: {poke: false} %>
       </div>
     <% end %>
    </div>

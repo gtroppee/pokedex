@@ -1,6 +1,10 @@
 class UserPokemonsController < ApplicationController
 	before_action :authenticate_user!
 
+  def index
+    @pokemons = Pokemon.all.order('pkdx_id ASC').paginate(page: params[:page])
+  end
+
   def show
   	user = current_user.id
   	@pokemons = UserPokemon.select(:pokemon_id).where(user_id: user)
@@ -12,12 +16,18 @@ class UserPokemonsController < ApplicationController
   end
 
   def create
-  	pokemon = Pokemon.find(params[:pokemon])
-  	user = current_user
-    @selection = UserPokemon.create(
-    	user_id: user.id,
-    	pokemon_id: pokemon.id
-    	)
+    ids = params['pokemon_ids'].split(',')
+    user = current_user
+
+    ids.each do |id|
+      pokemon = Pokemon.find_by_id(id)
+      @selection = UserPokemon.create(
+      	user_id: user.id,
+      	pokemon_id: pokemon.id,
+        attack: pokemon.data['attack'],
+        defense: pokemon.data['defense']
+      	)
+    end
     redirect_to user_pokemon_path(pokemon.id)
   end
 

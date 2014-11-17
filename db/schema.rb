@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116112916) do
+ActiveRecord::Schema.define(version: 20141117121513) do
 
   create_table "pokemon_teams", force: true do |t|
     t.integer  "team_id"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20141116112916) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "type_team"
+    t.integer  "attack"
+    t.integer  "defense"
   end
 
   add_index "user_pokemons", ["pokemon_id"], name: "index_user_pokemons_on_pokemon_id"
