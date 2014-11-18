@@ -50,3 +50,15 @@ function addPoke(ids){
     contentType: "application/javascript",
   });
 }
+
+function joinTour(id){
+  $.ajax({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader(
+        'X-CSRF-Token', 
+        $('meta[name="csrf-token"]').attr('content'))},
+    url: '/team_tournaments'+ '?tour_id=' + id,
+    type: "GET",
+    contentType: "application/javascript",
+  });
+}

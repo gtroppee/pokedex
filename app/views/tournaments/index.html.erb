@@ -1,0 +1,23 @@
+<h1>Tournaments#index</h1>
+
+
+<% @tournaments.each do |t| %>
+<div  class="tournaments">
+	<div1 data-tour-id="<%= t.id %>">
+		<h3><%= t.name %></h3>
+		<p><%= t.desc %></p>
+		<p>Will begin at  <%= t.date %></p>
+		<%= link_to 'Join it', '#', class: 'btn btn-primary', id: 'join-tour'%>
+	</div1>
+</div>
+<% end %>
+
+<script type="text/javascript">
+	item = document.getElementsByTagName('div1');
+	$('#join-tour').click(function(){
+		tour_id = item[0].getAttribute('data-tour-id');
+		joinTour(tour_id);
+		document.location.href= '/team_tournaments';
+		console.log(tour_id)
+	})
+</script>

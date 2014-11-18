@@ -1,7 +1,8 @@
 Pokedex::Application.routes.draw do
 
   root "pokemons#index"
-
+  resources :tournaments
+  resources :team_tournaments
   resources :pokemon_teams
   resources :poke_types, only: [:index, :show]
   resources :reports

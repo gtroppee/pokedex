@@ -7,9 +7,10 @@
     <div>
        <%= image_tag(pokemon.avatar, size: '120x120', :class => 'pokemon-img') %>
     </div>
-    <p>
-      <%= button_to('Select', user_pokemons_path(pokemon: pokemon), class: 'btn btn-primary col-sm-12') %>
-    </p>
+    <% if Rails.env.development? %>
+      <p> pkdx = <%= pokemon.pkdx_id %> </p>
+      <p> id = <%= pokemon.id %> </p>
+    <% end %>
    </div>
    <%= current_user.user_pokemons.where(pokemon_id: pokemon.pkdx_id).count %>
   </div>

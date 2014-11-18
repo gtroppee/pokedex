@@ -11,7 +11,16 @@ li {
 }
 */
 
+div.tournaments {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: rgba(250, 0, 0, 0.5);
+	margin: 5px;
+	padding: 20px;
+	font-family: Verdana;
 
+}
 
 li.evolution {
 	display: inline-block;

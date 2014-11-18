@@ -15,7 +15,14 @@ module ApplicationHelper
 	def pokemon_in_team(id_team)
 		pokemons = PokemonTeam.where(team_id: id_team)
 		pokemons = pokemons.map do |p|
-			Pokemon.find_by_id(p['pokemon_id'])
+			Pokemon.find_by(pkdx_id: p['pokemon_id'])
+		end
+	end
+
+	def pokemons_belong_user(user)
+		pokemons = UserPokemon.all.where(user_id: user)
+		pokemons = pokemons.map do |p|
+			Pokemon.find_by(pkdx_id: p['pokemon_id'])
 		end
 	end
 

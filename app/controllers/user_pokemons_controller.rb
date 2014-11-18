@@ -6,31 +6,41 @@ class UserPokemonsController < ApplicationController
   end
 
   def show
-  	user = current_user.id
-  	@pokemons = UserPokemon.select(:pokemon_id).where(user_id: user)
-    @pokes = @pokemons.map do |p|
-      Pokemon.find_by_id(p['pokemon_id'])
-    end
-  	id_poke = UserPokemon.where(user_id: current_user.id).last
-  	@new_poke = Pokemon.find_by_id(id_poke['pokemon_id'])
+  	pokemons = UserPokemon.select(:pokemon_id).where(user_id: current_user.id)
+    @pokes = pokemons.all.map do |p| p.pokemon_id end
   end
 
+
   def create
-    ids = params['pokemon_ids'].split(',').map(&:to_i)
-    return @limit_reached = true if ids.size > 30
 
-    current_user.user_pokemons.delete_all #TODO find a better way to do this shit
+    new_ids = params['pokemon_ids'].split(',').map(&:to_i)
+    return @limit_reached = true if new_ids.size > 10
 
-    ids.each do |id|
-      pokemon = Pokemon.find_by_id(id)
-      @selection = UserPokemon.create(
-      	user_id:    current_user.id,
-      	pokemon_id: pokemon.id,
-        attack:     pokemon.data['attack'],
-        defense:    pokemon.data['defense']
-      	)
+    new_ids.push(-1) ## valeur d'arret
+    current_ids = UserPokemon.all.map do |id| id.pokemon_id end
+## delete les absents
+    current_ids.each do |c_id|
+      new_ids.each do |n_id|
+        if c_id == n_id
+          break
+        elsif n_id == -1
+          UserPokemon.where(pokemon_id: c_id).destroy_all
+        end
+      end
     end
 
+## add les nouveaux
+    new_ids.each do |n|
+      if UserPokemon.find_by(pokemon_id: n).nil? && n != -1
+        pokemon = Pokemon.find_by(pkdx_id: n)
+        UserPokemon.create(
+          user_id:    current_user.id,
+          pokemon_id: pokemon.pkdx_id,
+          attack:     pokemon.data['attack'],
+          defense:    pokemon.data['defense']
+        )
+      end
+    end
     respond_to do |format|
       format.js
     end

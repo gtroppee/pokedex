@@ -94,6 +94,15 @@ namespace :pk do
     end
   end
 
+  task tournament: :environment do
+    ActiveRecord::Base.transaction do
+      Tournament.create(
+        name: 'League Pokemon',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at sapien maximus, porttitor lectus vitae, mollis velit. Cras fringilla vestibulum maximus. Duis turpis odio, fermentum eu leo sed, volutpat finibus dui. Proin eget volutpat mauris. Mauris quis orci eu elit porta commodo. Vivamus odio ipsum, vulputate vel diam a, ultricies eleifend quam. Curabitur et risus diam. Cras non erat fringilla, viverra nunc sit amet, fermentum orci. Fusce molestie lectus ut tortor varius, vel dapibus sem auctor. Suspendisse nec aliquet nunc, non varius enim. Etiam lacinia tincidunt ex vel vehicula. Quisque quis ante ex. ',
+        date: '2014-11-21 12:00:00'
+      )
+    end
+  end
   # task team: environment do
 
   #   poketypes = HTTParty.get("http://pokeapi.co/api/v1/type?limit=0")['objects']['name']

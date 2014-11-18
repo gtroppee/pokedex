@@ -1,5 +1,5 @@
 <% if @limit_reached %>
   alert('limit_reached')
 <% else %>
-  alert('yay')
+  document.location.href= '/user_pokemons/new<%= current_user.id %>' 
 <% end %>

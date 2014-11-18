@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117121513) do
+ActiveRecord::Schema.define(version: 20141118142222) do
 
   create_table "pokemon_teams", force: true do |t|
     t.integer  "team_id"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20141117121513) do
 
   add_index "reports", ["pokemon_id"], name: "index_reports_on_pokemon_id"
 
+  create_table "team_tournaments", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "tournament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_tournaments", ["team_id"], name: "index_team_tournaments_on_team_id"
+  add_index "team_tournaments", ["tournament_id"], name: "index_team_tournaments_on_tournament_id"
+
   create_table "teams", force: true do |t|
     t.string   "type_team"
     t.datetime "created_at"
@@ -54,6 +64,14 @@ ActiveRecord::Schema.define(version: 20141117121513) do
   end
 
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
+
+  create_table "tournaments", force: true do |t|
+    t.string   "name"
+    t.text     "desc"
+    t.datetime "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_pokemons", force: true do |t|
     t.integer  "user_id"

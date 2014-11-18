@@ -1,0 +1,40 @@
+<h1>TeamTournaments#index</h1>
+<h2>Compose your Team</h2>
+<p>You can select 3 pokemons</p>
+<% @pokemons.each do |p| %>
+	<%= image_tag(p.avatar) %>
+<% end %>
+
+<div class="page-header">
+  <%= link_to 'Add Poke', '#', class: 'btn btn-primary', id: 'add-poke' %>
+</div>
+
+<div class="row">
+  <div class="pokemon-list">
+    <% @pokemons.each do |pokemon| %>
+      <div  id="pokeselect-<%= pokemon.pkdx_id %>"> 
+        <%= render partial: 'user_pokemons/pokemon', object: pokemon %>
+      </div>
+    <% end %>
+   </div>
+</div>
+
+<script type="text/javascript">
+
+    $('.pokemon-img').click(function(){ addPokemon($(this)); });
+
+    function addPokemon(element){
+      if(element.parents('.pokemon-item').hasClass('selected')){
+        element.parents('.pokemon-item').removeClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length <= 20){
+        element.parents('.pokemon-item').addClass('selected');
+      }else if(!element.parents('.pokemon-item').hasClass('selected') && $('.pokemon-item.selected').length > 20){
+        notify();
+      }
+    }
+
+    $('#add-poke').click(function(){
+      pokmemon_ids = $.map($('.pokemon-item.selected'), function(item){return item.getAttribute('data-pokemon-id'); });
+      addPoke(pokmemon_ids);
+    });
+</script>
